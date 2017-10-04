@@ -41,7 +41,7 @@ namespace WebAppCore.Controllers
             _logger = loggerFactory.CreateLogger<ManageController>();
         }
 
-        //
+        // dev1
         // GET: /Manage/Index
         [HttpGet]
         public async Task<IActionResult> Index(ManageMessageId? message = null)

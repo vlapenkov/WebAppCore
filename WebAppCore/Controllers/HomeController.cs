@@ -33,7 +33,7 @@ namespace WebAppCore.Controllers
 
         public IActionResult About()
         {
-            _logger.LogInformation("Index page says hello");
+            _logger.LogInformation("dev1");
             _logger.LogDebug("Index debug page says hello");
             _logger.LogTrace("Index trace page says hello");
 
