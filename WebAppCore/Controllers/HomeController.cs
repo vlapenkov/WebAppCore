@@ -24,7 +24,7 @@ namespace WebAppCore.Controllers
 
         public IActionResult Index()
         {
-            return Content("123");
+            return Content("master");
            /* throw new NullReferenceException();
             return View(); */
         }
