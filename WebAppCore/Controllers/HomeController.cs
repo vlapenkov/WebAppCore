@@ -24,14 +24,16 @@ namespace WebAppCore.Controllers
 
         public IActionResult Index()
         {
-            return Content("master");
+            
+
+            return Content("dev1");
            /* throw new NullReferenceException();
             return View(); */
         }
 
         public IActionResult About()
         {
-            _logger.LogInformation("master");
+            _logger.LogInformation("dev1");
             _logger.LogDebug("Index debug page says hello");
             _logger.LogTrace("Index trace page says hello");
 
