@@ -20,7 +20,7 @@ namespace WebAppCore.Controllers
                 _logger = logger;
             }
         
-       [ResponseCache(Duration = 100)]
+   //    [ResponseCache(Duration = 100)]
 
         public IActionResult Index()
         {
