@@ -24,9 +24,9 @@ namespace WebAppCore.Controllers
 
         public IActionResult Index()
         {
-            if (_logger != null) throw new NullReferenceException();
+            
 
-            return Content("123");
+            return Content("dev1");
            /* throw new NullReferenceException();
             return View(); */
         }
