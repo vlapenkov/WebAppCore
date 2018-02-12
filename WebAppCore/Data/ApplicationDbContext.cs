@@ -12,6 +12,7 @@ namespace WebAppCore.Data
     {
 
         public DbSet<Person> Persons { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

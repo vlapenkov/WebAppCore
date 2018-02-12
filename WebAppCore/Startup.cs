@@ -80,6 +80,8 @@ namespace WebAppCore
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            // можно и через singleton
+            services.AddTransient<ContextCheckingService>();
             services.AddMemoryCache();
             services.AddSingleton<DbCachingService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -143,13 +145,15 @@ namespace WebAppCore
             app.UseHello();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
-
+            /*
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            }); */
+
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

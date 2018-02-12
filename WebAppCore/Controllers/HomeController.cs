@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using NLog.Extensions.Logging;
 using NLog.Web;
 using Microsoft.Extensions.Logging;
+using WebAppCore.Data;
+using WebAppCore.Services;
 
 namespace WebAppCore.Controllers
 {
@@ -13,22 +15,26 @@ namespace WebAppCore.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        private readonly ApplicationDbContext _appDbContext;
+        private readonly ContextCheckingService _ccs;
 
-      
-            public HomeController(ILogger<HomeController> logger)
-            {
-                _logger = logger;
-            }
-        
-   //    [ResponseCache(Duration = 100)]
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext appDbContext , ContextCheckingService ccs)
+        {
+            _logger = logger;
+            _appDbContext = appDbContext;
+            _ccs = ccs;
+
+        }
+
+        //    [ResponseCache(Duration = 100)]
 
         public IActionResult Index()
         {
-            
 
-            return Content("dev1");
-           /* throw new NullReferenceException();
-            return View(); */
+
+            /*   return Content("dev1");
+              /* throw new NullReferenceException(); */
+            return View();
         }
 
         public IActionResult About()
@@ -54,5 +60,17 @@ namespace WebAppCore.Controllers
         {
             return View();
         }
+
+        public IActionResult Products(int id)
+        {
+            var product = _appDbContext.Products.FirstOrDefault(p => p.Id == id);
+            //return Json(new { id = product.Id, name = product.Name });
+            return Json(product);
+        }
+
+        public IActionResult GetContext()=>
+        
+           Json(_ccs.GetField("first"));
+        
     }
 }

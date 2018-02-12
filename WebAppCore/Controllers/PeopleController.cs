@@ -40,7 +40,7 @@ namespace WebAppCore.Controllers
         /// <param name="page"></param>
         /// <param name="searchstring"></param>
         /// <returns></returns>
-        /// 
+        /// Пример списка с пагинацией. Работает с отборами и без! проверял.
         [ResponseCache(Duration = 100, VaryByQueryKeys =new []{"page", "searchstring"})]
         public async Task<IActionResult> List(int? page,string searchstring)
         {

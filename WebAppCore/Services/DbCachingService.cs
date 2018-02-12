@@ -9,7 +9,7 @@ using WebAppCore.Models;
 namespace WebAppCore.Services
 {
     /// <summary>
-    /// Возвращает из memcache  первого Person , memcache обнуляется раз в 10 секунд (для примера)
+    /// Возвращает из memcache  первого Person , memcache обнуляется раз в 10 секунд TimeSpan.FromSeconds(10) (для примера)
     /// </summary>
     public class DbCachingService
     {

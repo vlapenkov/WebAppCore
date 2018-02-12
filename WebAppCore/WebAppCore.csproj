@@ -12,12 +12,12 @@
     <UserSecretsId>aspnet-WebAppCore-6516f79b-cb7c-43cd-b942-286829c40402</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
+ <!-- <ItemGroup>
     <Content Include="wwwroot\css\custom.css" />
     <Content Include="wwwroot\css\custom.min.css" />
     <Content Include="wwwroot\js\custom.js" />
     
-  </ItemGroup>
+  </ItemGroup>-->
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />

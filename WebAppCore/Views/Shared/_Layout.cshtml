@@ -7,9 +7,15 @@
     <title>@ViewData["Title"] - WebAppCore</title>
 
     
-    <link rel="stylesheet" href="/lib/fontawesome/css/font-awesome.min.css" />
+    
+    <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <environment names="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />-->
+       <!-- <link href="~/lib/MDBootstrap/css/mdb.css" rel="stylesheet" /> -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!--<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <link href="~/css/material.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="~/css/site.css" />
         
     </environment>
@@ -38,6 +44,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="People" asp-action="Index">People</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
@@ -48,12 +55,15 @@
         <hr />
         <footer>
             <p>&copy; 2017 - WebAppCore</p>
+            <p><a asp-area="" asp-controller="People" asp-action="Index">People</a></p>
         </footer>
     </div>
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+       <!-- <script src="~/lib/MDBootstrap/js/mdb.js"></script>-->
         <script src="~/js/site.js" asp-append-version="true"></script>
 
     </environment>

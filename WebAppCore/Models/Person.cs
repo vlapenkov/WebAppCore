@@ -35,4 +35,14 @@ namespace WebAppCore.Models
         }
 
     }
+
+    public class Product
+    {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        [Required]
+        [MaxLength(Byte.MaxValue)]
+        public string Name { get; set; }
+    }
 }
