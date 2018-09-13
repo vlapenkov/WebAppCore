@@ -17,9 +17,9 @@ namespace WebAppCore.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        private readonly DbCachingService _dbCs;
+        private readonly DbSetCachingService<Person> _dbCs;
 
-        public PeopleController(ApplicationDbContext context, DbCachingService cachingService)
+        public PeopleController(ApplicationDbContext context, DbSetCachingService<Person> cachingService)
         {
             _context = context;
             _dbCs = cachingService;
@@ -27,10 +27,10 @@ namespace WebAppCore.Controllers
 
         // GET: People
 
-        [ResponseCache(Duration = 100)]
-        public async Task<IActionResult> Index()
+      
+        public async Task<IActionResult> Index(string name)
         {
-            return View(await _context.Persons.ToListAsync());
+            return View(_dbCs.All());
         }
 
 

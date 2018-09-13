@@ -8,6 +8,8 @@ using NLog.Web;
 using Microsoft.Extensions.Logging;
 using WebAppCore.Data;
 using WebAppCore.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Localization;
 
 namespace WebAppCore.Controllers
 {
@@ -17,12 +19,22 @@ namespace WebAppCore.Controllers
 
         private readonly ApplicationDbContext _appDbContext;
         private readonly ContextCheckingService _ccs;
+        private readonly IStringLocalizer<HomeController> _localizer;
+        private readonly IStringLocalizer<SharedResource> _resourceLocalizer;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext appDbContext , ContextCheckingService ccs)
+        public HomeController(ILogger<HomeController> logger, 
+            ApplicationDbContext appDbContext , 
+            ContextCheckingService ccs, 
+            IStringLocalizer<HomeController> localizer,
+            IStringLocalizer<SharedResource> resourceLocalizer
+            )
         {
+            _resourceLocalizer = resourceLocalizer;
+            _localizer = localizer;
             _logger = logger;
             _appDbContext = appDbContext;
             _ccs = ccs;
+           
 
         }
 
@@ -31,12 +43,13 @@ namespace WebAppCore.Controllers
         public IActionResult Index()
         {
 
-
-            /*   return Content("dev1");
+            var  str= _localizer["String2"];
+           var rl = _resourceLocalizer["String1"];
+               return Content($"{ str} {rl}");
               /* throw new NullReferenceException(); */
-            return View();
+            //return View();
         }
-
+        [Authorize(Roles="Manager")]
         public IActionResult About()
         {
             _logger.LogInformation("dev1");

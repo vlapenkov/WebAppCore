@@ -15,6 +15,12 @@ using WebAppCore.Services;
 using NLog.Extensions.Logging;
 using NLog.Web;
 using Microsoft.AspNetCore.Http;
+using System.Globalization;
+//using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Localization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 
 namespace WebAppCore
 {
@@ -59,9 +65,10 @@ namespace WebAppCore
 
 
             services.Configure<MySettings>(Configuration.GetSection("MySettings"));
-           services.AddSingleton<IConfiguration>(Configuration);
+            services.AddSingleton<IConfiguration>(Configuration);
 
             services.AddResponseCaching();
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc();
 
             // Adds a default in-memory implementation of IDistributedCache.
@@ -74,7 +81,7 @@ namespace WebAppCore
                 options.CookieHttpOnly = true;
             });
 
-            
+
 
 
             // Add application services.
@@ -83,12 +90,29 @@ namespace WebAppCore
             // можно и через singleton
             services.AddTransient<ContextCheckingService>();
             services.AddMemoryCache();
-            services.AddSingleton<DbCachingService>();
+            //services.AddSingleton<PersonsCachingService>();
+            services.AddSingleton(typeof(DbSetCachingService<>));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                      new CultureInfo("en"),
+                new CultureInfo("ru"),
+                new CultureInfo("de"),
+                new CultureInfo("fr")
+                };
+                options.DefaultRequestCulture = new RequestCulture("en");
+
+
+                options.SupportedCultures = supportedCultures;
+
+
+                options.SupportedUICultures = supportedCultures;
+            });
 
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
@@ -99,10 +123,30 @@ namespace WebAppCore
 
 
             // логирую в файл C:\Temp\nlog
+
+            
+
+
             loggerFactory.AddNLog();
 
             //add NLog.Web
             app.AddNLogWeb();
+
+            /*
+            var supportedCultures = new[]
+            {
+                new CultureInfo("en"),
+                new CultureInfo("ru"),
+                new CultureInfo("de")
+            };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("ru"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });*/
+            var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(locOptions.Value);
 
             app.UseResponseCaching();
 
@@ -119,7 +163,7 @@ namespace WebAppCore
 
             app.UseStaticFiles();
 
-            app.UseIdentity();
+            app.UseAuthentication();
 
             app.UseSession();
 

@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "name": "yourappname",
+  "private": true,
+  "dependencies": {
+    "jquery": "^2.2.4",
+    "select2": "^4.0.3"
+  },
+  "devDependencies": {
+    "webpack": "^2.5.1",
+    "clean-webpack-plugin": "^0.1.16",
+    "typescript": "^2.3.2",
+    "ts-loader": "^2.0.3"
+  },
+  "scripts": {
+    "webpack-script": "webpack"
+  },
+  "-vs-binding": {
+    "BeforeBuild": [
+      "webpack-script"
+    ]
+  }
+}

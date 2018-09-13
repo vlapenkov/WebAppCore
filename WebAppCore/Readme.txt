@@ -4,3 +4,9 @@
   dotnet ef database update - создает БД и применяет миграции
 4. Для bundling и minification  достаточно добавить plugin bundle & minify
 5. PagedList есть в PeopleController/List
+
+
+6. После всего переделал проект на использование Webpack (вместо bower)
+https://habr.com/post/328638/
+
+7. После пункта 6 переделал на использвание TypeScript, но пока что не подружил с jquery
