@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "name": "signalr",
+  "private": true,
+  "dependencies": {
+    "@aspnet/signalr": "^1.1.0-preview2-35157",
+    "jquery": "^2.2.4",
+    "select2": "^4.0.3"
+  }
+}

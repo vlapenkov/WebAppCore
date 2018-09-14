@@ -1,4 +1,9 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+<h3>@SharedLocalizer["String1"]</h3>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 

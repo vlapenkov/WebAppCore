@@ -48,10 +48,10 @@
     <TypeScriptCompile Include="Scripts\main.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Controllers.HomeController.en-US.resx">
+    <EmbeddedResource Update="Resources\Controllers\HomeController.en.resx">
       <Generator></Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Controllers.HomeController.ru.resx">
+    <EmbeddedResource Update="Resources\Controllers\HomeController.ru.resx">
       <Generator></Generator>
     </EmbeddedResource>
   </ItemGroup>

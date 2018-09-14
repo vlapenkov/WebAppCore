@@ -53,7 +53,7 @@ namespace WebAppCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            
             services.AddCors();
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -63,13 +63,18 @@ namespace WebAppCore
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            });
 
             services.Configure<MySettings>(Configuration.GetSection("MySettings"));
             services.AddSingleton<IConfiguration>(Configuration);
 
             services.AddResponseCaching();
             services.AddLocalization(options => options.ResourcesPath = "Resources");
-            services.AddMvc();
+            services.AddMvc() .AddViewLocalization(); 
 
             // Adds a default in-memory implementation of IDistributedCache.
             services.AddDistributedMemoryCache();
@@ -94,24 +99,7 @@ namespace WebAppCore
             services.AddSingleton(typeof(DbSetCachingService<>));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.Configure<RequestLocalizationOptions>(options =>
-            {
-                var supportedCultures = new[]
-                {
-                      new CultureInfo("en"),
-                new CultureInfo("ru"),
-                new CultureInfo("de"),
-                new CultureInfo("fr")
-                };
-                options.DefaultRequestCulture = new RequestCulture("en");
-
-
-                options.SupportedCultures = supportedCultures;
-
-
-                options.SupportedUICultures = supportedCultures;
-            });
-
+         
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -132,7 +120,7 @@ namespace WebAppCore
             //add NLog.Web
             app.AddNLogWeb();
 
-            /*
+           
             var supportedCultures = new[]
             {
                 new CultureInfo("en"),
@@ -141,12 +129,12 @@ namespace WebAppCore
             };
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
-                DefaultRequestCulture = new RequestCulture("ru"),
+                DefaultRequestCulture = new RequestCulture("en"),
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures
-            });*/
-            var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-            app.UseRequestLocalization(locOptions.Value);
+            });
+           /* var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(locOptions.Value); */
 
             app.UseResponseCaching();
 

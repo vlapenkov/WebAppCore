@@ -10,6 +10,7 @@ using WebAppCore.Data;
 using WebAppCore.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Localization;
+using Microsoft.AspNetCore.Localization;
 
 namespace WebAppCore.Controllers
 {
@@ -43,9 +44,15 @@ namespace WebAppCore.Controllers
         public IActionResult Index()
         {
 
+            return View();
+           var feature= HttpContext.Features.Get<IRequestCultureFeature>();
+
+          
+
             var  str= _localizer["String2"];
            var rl = _resourceLocalizer["String1"];
-               return Content($"{ str} {rl}");
+               return Content($"Culture is : {feature.RequestCulture.UICulture}  ,{ str} {rl}");
+
               /* throw new NullReferenceException(); */
             //return View();
         }
