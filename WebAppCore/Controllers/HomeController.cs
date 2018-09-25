@@ -44,17 +44,11 @@ namespace WebAppCore.Controllers
         public IActionResult Index()
         {
 
-            return View();
+            
+            
            var feature= HttpContext.Features.Get<IRequestCultureFeature>();
-
-          
-
-            var  str= _localizer["String2"];
-           var rl = _resourceLocalizer["String1"];
-               return Content($"Culture is : {feature.RequestCulture.UICulture}  ,{ str} {rl}");
-
-              /* throw new NullReferenceException(); */
-            //return View();
+            ViewBag.Content = $"Culture is : {feature.RequestCulture.UICulture}  ,{_localizer["String2"]} { _resourceLocalizer["String1"]}";
+            return View();
         }
         [Authorize(Roles="Manager")]
         public IActionResult About()

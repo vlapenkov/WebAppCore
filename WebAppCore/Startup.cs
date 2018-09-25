@@ -167,10 +167,17 @@ namespace WebAppCore
             // app.UseSession(o => o.IdleTimeout = TimeSpan.FromSeconds(10));
 
            
-
+            // Пример переключения 
             app.Use(async (context, next) =>
             {
-                //    await context.Response.WriteAsync("<p>Begin Hello world0!</p>");
+               var _dbContext= context.RequestServices.GetService<ApplicationDbContext>();
+               var product= _dbContext.Set<Product>().First();
+                string culture = product.Id != 1 ? "ru": "en";
+
+                var requestCulture = new RequestCulture(culture);
+                context.Features.Set<IRequestCultureFeature>(new RequestCultureFeature(requestCulture, new QueryStringRequestCultureProvider()));
+                CultureInfo.CurrentCulture = requestCulture.Culture;
+                CultureInfo.CurrentUICulture = requestCulture.UICulture;
                 await next.Invoke();
                 //    await context.Response.WriteAsync("<p>End Hello world0!</p>");
             });
