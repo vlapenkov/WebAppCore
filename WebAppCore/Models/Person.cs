@@ -44,5 +44,7 @@ namespace WebAppCore.Models
         [Required]
         [MaxLength(Byte.MaxValue)]
         public string Name { get; set; }
+
+        public byte Rating { get; set; }
     }
 }

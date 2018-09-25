@@ -62,13 +62,13 @@ namespace WebAppCore
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
+/*
             services.AddAuthentication().AddGoogle(googleOptions =>
             {
                 googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
                 googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
             });
-
+            */
             services.Configure<MySettings>(Configuration.GetSection("MySettings"));
             services.AddSingleton<IConfiguration>(Configuration);
 
