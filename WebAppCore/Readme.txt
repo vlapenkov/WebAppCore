@@ -18,3 +18,7 @@ https://habr.com/post/328638/
 10. PagedList есть в проекте Logistics
 
 11. Меняем культуру на лету через Middleware
+
+12. GlobalException filter
+
+

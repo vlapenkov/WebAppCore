@@ -142,7 +142,7 @@ namespace WebAppCore.Controllers
                 return View();
             }
         }
-
+       
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> LoginWithRecoveryCode(string returnUrl = null)

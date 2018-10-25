@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,10 +14,9 @@ using NLog.Web;
 using Microsoft.AspNetCore.Http;
 using System.Globalization;
 //using Microsoft.AspNetCore.Localization;
-using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebAppCore
 {
@@ -62,19 +58,26 @@ namespace WebAppCore
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-/*
-            services.AddAuthentication().AddGoogle(googleOptions =>
+            /*
+                        services.AddAuthentication().AddGoogle(googleOptions =>
+                        {
+                            googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                            googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+                        });
+                        */
+            //  services.Configure<MySettings>(Configuration.GetSection("MySettings"));
+            services.Configure<CookiePolicyOptions>(options =>
             {
-                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
-                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            */
-            services.Configure<MySettings>(Configuration.GetSection("MySettings"));
+
             services.AddSingleton<IConfiguration>(Configuration);
 
             services.AddResponseCaching();
             services.AddLocalization(options => options.ResourcesPath = "Resources");
-            services.AddMvc() .AddViewLocalization(); 
+            services.AddMvc(o => { o.Filters.Add<GlobalExceptionFilter>(); }) .AddViewLocalization().SetCompatibilityVersion(CompatibilityVersion.Version_2_1); ; 
 
             // Adds a default in-memory implementation of IDistributedCache.
             services.AddDistributedMemoryCache();
@@ -83,7 +86,7 @@ namespace WebAppCore
             {
                 // Set a short timeout for easy testing.
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.CookieHttpOnly = true;
+             //   options.CookieHttpOnly = true;
             });
 
 
@@ -99,7 +102,9 @@ namespace WebAppCore
             services.AddSingleton(typeof(DbSetCachingService<>));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-         
+
+            services.AddHostedService<TimedHostedService>();
+
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -142,14 +147,17 @@ namespace WebAppCore
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-                app.UseBrowserLink();
+      //          app.UseBrowserLink();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
 
             app.UseAuthentication();
 

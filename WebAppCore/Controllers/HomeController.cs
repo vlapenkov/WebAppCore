@@ -11,6 +11,7 @@ using WebAppCore.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Hosting;
 
 namespace WebAppCore.Controllers
 {
@@ -22,12 +23,14 @@ namespace WebAppCore.Controllers
         private readonly ContextCheckingService _ccs;
         private readonly IStringLocalizer<HomeController> _localizer;
         private readonly IStringLocalizer<SharedResource> _resourceLocalizer;
+        private IHostingEnvironment _env;
 
         public HomeController(ILogger<HomeController> logger, 
             ApplicationDbContext appDbContext , 
             ContextCheckingService ccs, 
             IStringLocalizer<HomeController> localizer,
-            IStringLocalizer<SharedResource> resourceLocalizer
+            IStringLocalizer<SharedResource> resourceLocalizer,
+            IHostingEnvironment env
             )
         {
             _resourceLocalizer = resourceLocalizer;
@@ -35,6 +38,7 @@ namespace WebAppCore.Controllers
             _logger = logger;
             _appDbContext = appDbContext;
             _ccs = ccs;
+            _env = env;
            
 
         }
@@ -43,10 +47,14 @@ namespace WebAppCore.Controllers
 
         public IActionResult Index()
         {
+            
 
-            
-            
-           var feature= HttpContext.Features.Get<IRequestCultureFeature>();
+            _logger.LogError("LogError call", 1, 2, 3, "forth paramater");
+            _logger.LogInformation("LogInformation call",1,2,3, "forth paramater");
+            _logger.LogDebug("LogDebug call",1,2,3,4,"fifth parameter");
+            _logger.LogTrace("Index trace page says hello", "trace");
+
+            var feature= HttpContext.Features.Get<IRequestCultureFeature>();
             ViewBag.Content = $"Culture is : {feature.RequestCulture.UICulture}  ,{_localizer["String2"]} { _resourceLocalizer["String1"]}";
             return View();
         }
@@ -65,6 +73,7 @@ namespace WebAppCore.Controllers
 
         public IActionResult Contact()
         {
+            throw new NullReferenceException("something goes wrong");
             ViewData["Message"] = "Your contact page.";
 
             return View();
