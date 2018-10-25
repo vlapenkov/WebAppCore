@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WebAppCore.Data;
 using WebAppCore.Models;
 using WebAppCore.Services;
+using X.PagedList;
 
 
 // dev
@@ -50,6 +51,31 @@ namespace WebAppCore.Controllers
             ViewData["CurrentFilter"] = searchstring;
 
            return View(await PaginatedList<Person>.CreateAsync(persons/*_context.Persons.AsNoTracking()*/, page ?? 1, pageSize));
+        }
+
+        /// <summary>
+        /// Example of X.IPagedList
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="searchstring"></param>
+        /// <returns></returns>
+
+        public async Task<IActionResult> PagedList(int? page, string searchstring)
+        {
+            IPagedList<Person> personsList = _context.Persons.Where(p => searchstring == null || p.Name.Contains(searchstring)).AsNoTracking().ToPagedList(page ?? 1, 5);
+
+            var model = new PersonsViewModel
+            {
+                PersonsList = personsList,
+                Page = page ?? 1,
+                SearchString = searchstring,
+
+            };
+            
+
+            return View(model);
+
+           // return View(await PaginatedList<Person>.CreateAsync(persons/*_context.Persons.AsNoTracking()*/, page ?? 1, pageSize));
         }
 
 

@@ -15,10 +15,8 @@ https://habr.com/post/328638/
 
 9. Добавил signalR в этом же решении в новом проекте
 
-10. PagedList есть в проекте Logistics
+10. Меняем культуру на лету через Middleware
 
-11. Меняем культуру на лету через Middleware
+11. GlobalException filter
 
-12. GlobalException filter
-
-
+12. Добавил PagedList в People/PagedList

@@ -1,0 +1,59 @@
+﻿@using X.PagedList.Mvc
+@using X.PagedList
+@model PersonsViewModel
+@{
+    ViewData["Title"] = "PagedList";
+}
+
+<h2>PagedList</h2>
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-action="PagedList" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="PagedList">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+
+    <tbody>
+        @foreach (var item in Model.PersonsList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestProp1)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+@Html.PagedListPager(Model.PersonsList, page => Url.Action("PagedList",
+    new
+    {
+       page = page,
+       searchstring=Model.SearchString
+    }),X.PagedList.Mvc.Common.PagedListRenderOptionsBase.ClassicPlusFirstAndLast)
+
