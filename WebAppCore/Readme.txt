@@ -20,3 +20,7 @@ https://habr.com/post/328638/
 11. GlobalException filter
 
 12. Добавил PagedList в People/PagedList
+
+13.Добавил кастомную страницу со своей логикой в Pages/CustomPage. Layout используется один общий из Shared/Layout
+
+Вызывается /custompage
