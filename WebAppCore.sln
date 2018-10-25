@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppCore", "WebAppCore\WebAppCore.csproj", "{5677E70A-D4FA-4975-B364-8F91C99CE996}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.SignalR", "WebApp.SignalR\WebApp.SignalR.csproj", "{31B8D908-AA27-4B4C-9653-608E92624D70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.SignalR", "WebApp.SignalR\WebApp.SignalR.csproj", "{31B8D908-AA27-4B4C-9653-608E92624D70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
