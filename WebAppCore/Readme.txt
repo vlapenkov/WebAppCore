@@ -23,6 +23,18 @@ https://habr.com/post/328638/
 
 13.Добавил кастомную страницу со своей логикой в Pages/CustomPage. Layout используется один общий из Shared/Layout
 
-14. Добавил поддержку kendo ui autocomplete и datepicker (только js)
-
 Вызывается /custompage
+
+14. Добавил поддержку kendo ui autocomplete и datepicker (только js)  , лежит в DummyController
+
+
+Важно! Для kendo надо использовать  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.bootstrap-v4.min.css" />  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+
+    <script src="https://kendo.cdn.telerik.com/2018.1.221/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.1.221/js/kendo.all.min.js"></script>
+
+	Отдельно bootstrap4.css не нужен! (портит стили)
+
+

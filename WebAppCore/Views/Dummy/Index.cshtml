@@ -20,18 +20,52 @@
 
 </div>
 
-@Model.StartDate
+<div class="row">
+    <div class="col-6">
+        <form method="post" action="/kendo-ui/upload/submit">
+            <div class="demo-section k-content">
+                <input name="files" id="files" type="file" aria-label="files" />
+                <p style="padding-top: 1em; text-align: right">
+                    <button type="submit" class="k-button k-primary">Submit</button>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
 
-@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Cities))
 
-@section Scripts {
+<div id="example">
+    <div class="demo-section k-content">
+        <ul id="fieldlist">
+            <li>
+                <label>Temperature</label>
+                <input id="slider" class="temperature" />
+            </li>
+            <li>
+                <label>Humidity</label>
+                <div id="rangeslider" class="humidity">
+                    <input />
+                    <input />
+                </div>
+            </li>
+        </ul>
 
-<script>
+
+
+    </div>
+</div>
+    
+
+    
+
+    @section Scripts {
+
+        <script>
 
         (function () {
 
             var citiesArray = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Cities));
-            
+
             $("#StartDate").kendoDatePicker({
                 culture: "ru-RU",
                 //      value: $("#StartDate").val()
@@ -44,7 +78,26 @@
                 separator: ", ",
                 culture: "ru-RU",
             });
-        })();
-</script>
 
-}
+            $("#files").kendoUpload();
+
+
+            $("#slider").kendoSlider({              
+                min: 0,
+                max: 30,
+                smallStep: 1,
+                largeStep: 10,
+                value: 18
+            });
+
+            $("#rangeslider").kendoRangeSlider({                
+                min: 0,
+                max: 10,
+                smallStep: 1,
+                largeStep: 10, 
+                tickPlacement: "both"
+            });
+        })();
+        </script>
+
+    }
