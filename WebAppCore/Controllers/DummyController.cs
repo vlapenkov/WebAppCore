@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using WebAppCore.Models;
 
 namespace WebAppCore.Controllers
 {
@@ -20,9 +21,10 @@ namespace WebAppCore.Controllers
 
         public IActionResult Index()
         {
-            return Content(_localizer["String1"]);
+            var model = new KendoModel {StartDate=DateTime.Now };
+           // return Content(_localizer["String1"]);
 
-          //  return View();
+            return View(model);
         }
     }
 }

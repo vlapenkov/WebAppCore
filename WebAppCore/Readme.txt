@@ -23,4 +23,6 @@ https://habr.com/post/328638/
 
 13.Добавил кастомную страницу со своей логикой в Pages/CustomPage. Layout используется один общий из Shared/Layout
 
+14. Добавил поддержку kendo ui autocomplete и datepicker (только js)
+
 Вызывается /custompage

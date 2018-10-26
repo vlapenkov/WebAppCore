@@ -1,0 +1,50 @@
+﻿
+@model KendoModel;
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="form-group">
+    <label asp-for="StartDate"></label>
+    <input asp-for="StartDate" />
+
+</div>
+
+<div class="form-group">
+    <label asp-for="City"></label>
+    <input asp-for="City" />
+
+</div>
+
+@Model.StartDate
+
+@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Cities))
+
+@section Scripts {
+
+<script>
+
+        (function () {
+
+            var citiesArray = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Cities));
+            
+            $("#StartDate").kendoDatePicker({
+                culture: "ru-RU",
+                //      value: $("#StartDate").val()
+            });
+
+            $("#City").kendoAutoComplete({
+                dataSource: citiesArray,
+                filter: "startswith",
+                placeholder: "Выберите страну...",
+                separator: ", ",
+                culture: "ru-RU",
+            });
+        })();
+</script>
+
+}
