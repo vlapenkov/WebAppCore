@@ -13,6 +13,9 @@ namespace WebAppCore.Data
 
         public DbSet<Person> Persons { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<LocaleStringResource> LocaleStringResources { get; set; }
+        
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

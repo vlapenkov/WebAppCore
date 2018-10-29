@@ -74,6 +74,7 @@ namespace WebAppCore
             });
 
             services.AddSingleton<IConfiguration>(Configuration);
+            services.AddSingleton(typeof(MemoryCacheManager));
 
             services.AddResponseCaching();
             services.AddLocalization(options => options.ResourcesPath = "Resources");
@@ -85,12 +86,14 @@ namespace WebAppCore
             services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.Name = ".Terminal.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(3600);
              //   options.CookieHttpOnly = true;
             });
 
 
-
+            bool condition = true;
+            services.AddSingleton<ISimple>(c=> { if (!condition) return new ClassA(); else return new ClassB(); });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -102,6 +105,8 @@ namespace WebAppCore
             services.AddSingleton(typeof(DbSetCachingService<>));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            services.AddScoped(typeof(LocalizationService));
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
             services.AddHostedService<TimedHostedService>();
 

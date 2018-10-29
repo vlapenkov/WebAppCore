@@ -20,10 +20,17 @@ namespace WebAppCore.Controllers
 
         private readonly DbSetCachingService<Person> _dbCs;
 
-        public PeopleController(ApplicationDbContext context, DbSetCachingService<Person> cachingService)
+        private readonly MemoryCacheManager _cacheManager;
+        private readonly ISimple _simple;
+
+        
+
+        public PeopleController(ApplicationDbContext context, DbSetCachingService<Person> cachingService , MemoryCacheManager cacheManager , ISimple simple)
         {
             _context = context;
             _dbCs = cachingService;
+            _cacheManager = cacheManager;
+            _simple = simple;
         }
 
         // GET: People
@@ -31,9 +38,18 @@ namespace WebAppCore.Controllers
       
         public async Task<IActionResult> Index(string name)
         {
-            return View(_dbCs.All());
+
+            
+           var persons= _cacheManager.Get($"persons.{HttpContext.Session.Id}", ()=>_context.Persons.ToList(),2);
+             _cacheManager.Get("curDate", () => DateTime.Now, 1);
+            //ViewBag.Keys = _cacheManager.IsSet("persons");
+            return View(persons);
+            //  return View(_dbCs.All());
         }
 
+        public IActionResult GetSimple() => Content(_simple.ToString() + " "+ _simple.GetHashCode());
+
+        public IActionResult GetKeys() => Content( string.Join(';', _cacheManager.GetKeys()));
 
         /// <summary>
         /// Example of paginatedlist

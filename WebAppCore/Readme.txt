@@ -38,3 +38,6 @@ https://habr.com/post/328638/
 	Отдельно bootstrap4.css не нужен! (портит стили)
 
 
+	15. Прикручен MemoryCacheManager (NopCommerse)  который обертка над MemCache
+
+	16. LocalizationService (NopCommerse)  который берет переводы из базы
