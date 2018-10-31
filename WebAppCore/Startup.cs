@@ -83,9 +83,9 @@ namespace WebAppCore
 
             services.AddResponseCaching();
 
-          
 
-            services.AddSingleton<JsonLocalizationService>();
+            services.AddSingleton(s => new JsonLocalizationService(s.GetService<IHostingEnvironment>(), "Resources"));
+            //services.AddSingleton<JsonLocalizationService>();
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             

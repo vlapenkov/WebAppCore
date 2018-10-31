@@ -23,10 +23,12 @@ namespace WebAppCore
         private readonly IHostingEnvironment _hostingEnvironment;    
 
         public JsonLocalizationService(          
-            IHostingEnvironment hostingEnvironment
+            IHostingEnvironment hostingEnvironment,
+            string resourcesPath
            )
         {
-            _hostingEnvironment = hostingEnvironment;           
+            _hostingEnvironment = hostingEnvironment;
+            _resourcesPath = resourcesPath;
         }
 
         public LocalizedString this[string name]
