@@ -1,8 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
 @inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env
+@inject JsonLocalizationService ls
 
-<h3>@SharedLocalizer["String1"]</h3>
+<h3>String is:  @SharedLocalizer["String1"]</h3>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -11,6 +12,15 @@
 <p>
 @ViewBag.Content
     </p>
+
+<p>
+    @T("text1")  @T("text2")
+    Text3  @T("text3")  Text4  @T("text4") Text4  @ls["text5"]
+</p>
+
+
+@T("text1")
+
 
 <p>
     @env.EnvironmentName

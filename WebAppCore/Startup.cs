@@ -17,6 +17,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 namespace WebAppCore
 {
@@ -73,12 +74,24 @@ namespace WebAppCore
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+
+
+           
+
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddSingleton(typeof(MemoryCacheManager));
 
             services.AddResponseCaching();
+
+          
+
+            services.AddSingleton<JsonLocalizationService>();
+
             services.AddLocalization(options => options.ResourcesPath = "Resources");
-            services.AddMvc(o => { o.Filters.Add<GlobalExceptionFilter>(); }) .AddViewLocalization().SetCompatibilityVersion(CompatibilityVersion.Version_2_1); ; 
+            
+            services.AddMvc(o => { o.Filters.Add<GlobalExceptionFilter>(); }) .AddViewLocalization().SetCompatibilityVersion(CompatibilityVersion.Version_2_1); ;
+
+            
 
             // Adds a default in-memory implementation of IDistributedCache.
             services.AddDistributedMemoryCache();
@@ -107,6 +120,8 @@ namespace WebAppCore
 
             services.AddScoped(typeof(LocalizationService));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+
+            ServiceLocator.SetLocatorProvider(services.BuildServiceProvider());
 
             services.AddHostedService<TimedHostedService>();
 

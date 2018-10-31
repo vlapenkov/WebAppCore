@@ -41,3 +41,7 @@ https://habr.com/post/328638/
 	15. ѕрикручен MemoryCacheManager (NopCommerse)  который обертка над MemCache
 
 	16. LocalizationService (NopCommerse)  который берет переводы из базы
+
+
+	17. JsonLocalizationService (мо€ разработка), который берет переводы из папки Resources. 
+	“акже добавил шаблонизатор @T("test1") во все вьюхи путем переопределени€ NopRazorPage
