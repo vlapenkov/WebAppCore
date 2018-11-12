@@ -51,7 +51,7 @@ namespace WebAppCore.Controllers
 
         // PUT: api/People/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPerson([FromRoute] int id, [FromBody] Person person)
+        public async Task<IActionResult> PutPerson([FromRoute] int id, [FromBody]  Person person)
         {
             if (!ModelState.IsValid)
             {

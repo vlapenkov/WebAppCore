@@ -85,7 +85,7 @@ namespace WebAppCore
 
 
             services.AddSingleton(s => new JsonLocalizationService(s.GetService<IHostingEnvironment>(), "Resources"));
-            //services.AddSingleton<JsonLocalizationService>();
+            
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             

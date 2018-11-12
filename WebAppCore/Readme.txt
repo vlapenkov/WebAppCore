@@ -45,3 +45,5 @@ https://habr.com/post/328638/
 
 	17. JsonLocalizationService (моя разработка), который берет переводы из папки Resources. 
 	Также добавил шаблонизатор @T("test1") во все вьюхи путем переопределения NopRazorPage
+
+	18. Установил ElasticSearch , юзаем в Dummy/Elastic
