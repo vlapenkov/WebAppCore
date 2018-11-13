@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using WebAppCore.Data;
+
 using WebAppCore.Models;
 using WebAppCore.Services;
 using NLog.Extensions.Logging;
@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using WebApp.DAL;
 
 namespace WebAppCore
 {
@@ -196,10 +197,11 @@ namespace WebAppCore
 
            
             // Пример переключения 
+            
             app.Use(async (context, next) =>
             {
                var _dbContext= context.RequestServices.GetService<ApplicationDbContext>();
-               var product= _dbContext.Set<Product>().First();
+               var product= _dbContext.Set<Product>().AsNoTracking().First();
                 string culture = product.Id != 1 ? "ru": "en";
 
                 var requestCulture = new RequestCulture(culture);
@@ -208,7 +210,7 @@ namespace WebAppCore
                 CultureInfo.CurrentUICulture = requestCulture.UICulture;
                 await next.Invoke();
                 //    await context.Response.WriteAsync("<p>End Hello world0!</p>");
-            });
+            }); 
             app.UseHello();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715

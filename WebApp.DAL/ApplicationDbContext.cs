@@ -4,9 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using WebAppCore.Models;
+using WebApp.DAL;
 
-namespace WebAppCore.Data
+
+namespace WebApp.DAL
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

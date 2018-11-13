@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebAppCore.Data;
+using WebApp.DAL;
 
-namespace WebAppCore.Data.Migrations
+namespace WebApp.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181031132249_producers_added")]
-    partial class producers_added
+    [Migration("20181113095205_third")]
+    partial class third
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -131,7 +131,7 @@ namespace WebAppCore.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("WebAppCore.Models.ApplicationUser", b =>
+            modelBuilder.Entity("WebApp.DAL.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -185,7 +185,7 @@ namespace WebAppCore.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("WebAppCore.Models.Language", b =>
+            modelBuilder.Entity("WebApp.DAL.Language", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -199,7 +199,7 @@ namespace WebAppCore.Data.Migrations
                     b.ToTable("Languages");
                 });
 
-            modelBuilder.Entity("WebAppCore.Models.LocaleStringResource", b =>
+            modelBuilder.Entity("WebApp.DAL.LocaleStringResource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -218,7 +218,7 @@ namespace WebAppCore.Data.Migrations
                     b.ToTable("LocaleStringResources");
                 });
 
-            modelBuilder.Entity("WebAppCore.Models.Person", b =>
+            modelBuilder.Entity("WebApp.DAL.Person", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -241,7 +241,7 @@ namespace WebAppCore.Data.Migrations
                     b.ToTable("Persons");
                 });
 
-            modelBuilder.Entity("WebAppCore.Models.Producer", b =>
+            modelBuilder.Entity("WebApp.DAL.Producer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -253,20 +253,23 @@ namespace WebAppCore.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Producer");
+                    b.ToTable("Producers");
                 });
 
-            modelBuilder.Entity("WebAppCore.Models.Product", b =>
+            modelBuilder.Entity("WebApp.DAL.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(255);
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255);
 
-                    b.Property<int?>("ProducerId");
+                    b.Property<int>("ProducerId");
 
                     b.Property<byte>("Rating");
 
@@ -274,7 +277,7 @@ namespace WebAppCore.Data.Migrations
 
                     b.HasIndex("ProducerId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -287,7 +290,7 @@ namespace WebAppCore.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("WebAppCore.Models.ApplicationUser")
+                    b.HasOne("WebApp.DAL.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -295,7 +298,7 @@ namespace WebAppCore.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("WebAppCore.Models.ApplicationUser")
+                    b.HasOne("WebApp.DAL.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -308,7 +311,7 @@ namespace WebAppCore.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("WebAppCore.Models.ApplicationUser")
+                    b.HasOne("WebApp.DAL.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -316,25 +319,26 @@ namespace WebAppCore.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("WebAppCore.Models.ApplicationUser")
+                    b.HasOne("WebApp.DAL.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("WebAppCore.Models.LocaleStringResource", b =>
+            modelBuilder.Entity("WebApp.DAL.LocaleStringResource", b =>
                 {
-                    b.HasOne("WebAppCore.Models.Language", "Language")
+                    b.HasOne("WebApp.DAL.Language", "Language")
                         .WithMany()
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("WebAppCore.Models.Product", b =>
+            modelBuilder.Entity("WebApp.DAL.Product", b =>
                 {
-                    b.HasOne("WebAppCore.Models.Producer", "Producer")
+                    b.HasOne("WebApp.DAL.Producer", "Producer")
                         .WithMany("Products")
-                        .HasForeignKey("ProducerId");
+                        .HasForeignKey("ProducerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

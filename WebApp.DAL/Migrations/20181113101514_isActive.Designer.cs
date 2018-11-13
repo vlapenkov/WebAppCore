@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebAppCore.Data;
+using WebApp.DAL;
 
-namespace WebAppCore.Data.Migrations
+namespace WebApp.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181113101514_isActive")]
+    partial class isActive
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,7 +131,7 @@ namespace WebAppCore.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("WebAppCore.Models.ApplicationUser", b =>
+            modelBuilder.Entity("WebApp.DAL.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -183,7 +185,7 @@ namespace WebAppCore.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("WebAppCore.Models.Language", b =>
+            modelBuilder.Entity("WebApp.DAL.Language", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -197,7 +199,7 @@ namespace WebAppCore.Data.Migrations
                     b.ToTable("Languages");
                 });
 
-            modelBuilder.Entity("WebAppCore.Models.LocaleStringResource", b =>
+            modelBuilder.Entity("WebApp.DAL.LocaleStringResource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -216,7 +218,7 @@ namespace WebAppCore.Data.Migrations
                     b.ToTable("LocaleStringResources");
                 });
 
-            modelBuilder.Entity("WebAppCore.Models.Person", b =>
+            modelBuilder.Entity("WebApp.DAL.Person", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -239,11 +241,13 @@ namespace WebAppCore.Data.Migrations
                     b.ToTable("Persons");
                 });
 
-            modelBuilder.Entity("WebAppCore.Models.Producer", b =>
+            modelBuilder.Entity("WebApp.DAL.Producer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsActive");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -254,11 +258,14 @@ namespace WebAppCore.Data.Migrations
                     b.ToTable("Producers");
                 });
 
-            modelBuilder.Entity("WebAppCore.Models.Product", b =>
+            modelBuilder.Entity("WebApp.DAL.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -285,7 +292,7 @@ namespace WebAppCore.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("WebAppCore.Models.ApplicationUser")
+                    b.HasOne("WebApp.DAL.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -293,7 +300,7 @@ namespace WebAppCore.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("WebAppCore.Models.ApplicationUser")
+                    b.HasOne("WebApp.DAL.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -306,7 +313,7 @@ namespace WebAppCore.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("WebAppCore.Models.ApplicationUser")
+                    b.HasOne("WebApp.DAL.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -314,23 +321,23 @@ namespace WebAppCore.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("WebAppCore.Models.ApplicationUser")
+                    b.HasOne("WebApp.DAL.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("WebAppCore.Models.LocaleStringResource", b =>
+            modelBuilder.Entity("WebApp.DAL.LocaleStringResource", b =>
                 {
-                    b.HasOne("WebAppCore.Models.Language", "Language")
+                    b.HasOne("WebApp.DAL.Language", "Language")
                         .WithMany()
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("WebAppCore.Models.Product", b =>
+            modelBuilder.Entity("WebApp.DAL.Product", b =>
                 {
-                    b.HasOne("WebAppCore.Models.Producer", "Producer")
+                    b.HasOne("WebApp.DAL.Producer", "Producer")
                         .WithMany("Products")
                         .HasForeignKey("ProducerId")
                         .OnDelete(DeleteBehavior.Cascade);

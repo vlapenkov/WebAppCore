@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebAppCore.Models
+namespace WebApp.DAL
 {
     public class Person
     {
@@ -36,39 +36,8 @@ namespace WebAppCore.Models
 
     }
 
-    public class Product
-    {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+   
 
 
-        [ForeignKey("Producer")]
-        public int ProducerId { get; set; }
-
-        [Required]
-        [MaxLength(Byte.MaxValue)]
-        public string Name { get; set; }
-
-        public byte Rating { get; set; }
-        public Producer Producer { get; set; }
-    }
-
-
-    public class Producer
-    {
-        public Producer()
-        {
-            Products = new List<Product>();
-        }
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
-        [Required]
-        [MaxLength(Byte.MaxValue)]
-        public string Name { get; set; }
-
-
-        public ICollection<Product> Products { get; set; }
-        
-    }
+    
 }

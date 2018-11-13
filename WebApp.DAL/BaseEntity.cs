@@ -1,4 +1,4 @@
-﻿namespace WebAppCore.Models
+﻿namespace WebApp.DAL
 {
     public class BaseEntity
     {

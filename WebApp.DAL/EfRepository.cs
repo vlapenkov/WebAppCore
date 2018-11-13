@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebAppCore.Data;
 
-namespace WebAppCore.Models
+
+namespace WebApp.DAL
 {
     public partial class EfRepository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {

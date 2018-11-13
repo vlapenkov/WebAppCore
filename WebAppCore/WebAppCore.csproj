@@ -53,6 +53,9 @@
     <PackageReference Include="X.PagedList.Mvc.Core" Version="7.6.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WebApp.DAL\WebApp.DAL.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <TypeScriptCompile Include="Scripts\main.ts" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +78,9 @@
     <None Update="nlog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebAppCore.Models
+namespace WebApp.DAL
 {
     public partial class LocaleStringResource : BaseEntity
     {

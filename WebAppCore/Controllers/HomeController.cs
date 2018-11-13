@@ -6,12 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using NLog.Extensions.Logging;
 using NLog.Web;
 using Microsoft.Extensions.Logging;
-using WebAppCore.Data;
+
 using WebAppCore.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Hosting;
+using WebApp.DAL;
 
 namespace WebAppCore.Controllers
 {

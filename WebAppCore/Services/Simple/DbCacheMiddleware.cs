@@ -6,7 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebAppCore.Data;
+using WebApp.DAL;
+
 using WebAppCore.Models;
 
 namespace WebAppCore.Services
