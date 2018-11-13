@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebAppCore.Services
+namespace WebApp.Services
 {
     public static partial class NopCachingDefaults
     {

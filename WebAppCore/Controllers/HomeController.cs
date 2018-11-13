@@ -13,6 +13,7 @@ using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Hosting;
 using WebApp.DAL;
+using WebApp.Services;
 
 namespace WebAppCore.Controllers
 {

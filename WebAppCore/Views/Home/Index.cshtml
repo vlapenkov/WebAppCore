@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
 @inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env
-@inject JsonLocalizationService ls
+@inject WebApp.Services.JsonLocalizationService ls
 
 <h3>String is:  @SharedLocalizer["String1"]</h3>
 

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApp.DAL;
-
+using WebApp.Services;
 using WebAppCore.Models;
 using WebAppCore.Services;
 using X.PagedList;

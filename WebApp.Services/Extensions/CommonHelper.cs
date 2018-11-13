@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace WebAppCore.Extensions
+namespace WebApp.Services.Extensions
 {
     public class CommonHelper
     {

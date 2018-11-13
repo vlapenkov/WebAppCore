@@ -7,6 +7,7 @@ using Elasticsearch.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Newtonsoft.Json.Linq;
+using WebApp.Services;
 using WebAppCore.Models;
 using WebAppCore.Services;
 

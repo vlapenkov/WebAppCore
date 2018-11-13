@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppCore", "WebAppCore\We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.SignalR", "WebApp.SignalR\WebApp.SignalR.csproj", "{31B8D908-AA27-4B4C-9653-608E92624D70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.DAL", "WebApp.DAL\WebApp.DAL.csproj", "{66B75CE1-6E15-41B5-B22B-1FF3E5D2DDE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.DAL", "WebApp.DAL\WebApp.DAL.csproj", "{66B75CE1-6E15-41B5-B22B-1FF3E5D2DDE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Services", "WebApp.Services\WebApp.Services.csproj", "{E7B30B3F-672E-4539-A064-F179CE9BD4C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{66B75CE1-6E15-41B5-B22B-1FF3E5D2DDE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66B75CE1-6E15-41B5-B22B-1FF3E5D2DDE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66B75CE1-6E15-41B5-B22B-1FF3E5D2DDE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7B30B3F-672E-4539-A064-F179CE9BD4C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7B30B3F-672E-4539-A064-F179CE9BD4C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7B30B3F-672E-4539-A064-F179CE9BD4C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7B30B3F-672E-4539-A064-F179CE9BD4C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

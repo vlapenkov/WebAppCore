@@ -9,11 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using WebApp.DAL;
+using WebApp.Services.Extensions;
 
-using WebAppCore.Extensions;
-using WebAppCore.Models;
-
-namespace WebAppCore.Services
+namespace WebApp.Services
 {
     /// <summary>
     /// Сервис NopCommerce который хранит переводы в базе 

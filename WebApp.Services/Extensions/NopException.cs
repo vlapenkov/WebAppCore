@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
-namespace WebAppCore.Extensions
+namespace WebApp.Services.Extensions
 {
     /// <summary>
     /// Represents errors that occur during application execution

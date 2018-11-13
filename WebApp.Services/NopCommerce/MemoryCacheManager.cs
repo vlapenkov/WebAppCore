@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace WebAppCore.Services
+namespace WebApp.Services
 {
     /// <summary>
     /// Represents a memory cache manager (NopCommerce)

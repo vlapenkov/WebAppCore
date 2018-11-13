@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using WebApp.DAL;
+using WebApp.Services;
 
 namespace WebAppCore
 {
@@ -71,7 +72,7 @@ namespace WebAppCore
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
@@ -100,9 +101,11 @@ namespace WebAppCore
             services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.
-                options.Cookie.Name = ".Terminal.Session";
-                options.IdleTimeout = TimeSpan.FromSeconds(3600);
-             //   options.CookieHttpOnly = true;
+            //    options.Cookie.Name = ".Terminal.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(30);
+               // options.Cookie.HttpOnly = true;
+                
+                //   options.CookieHttpOnly = true;
             });
 
 
