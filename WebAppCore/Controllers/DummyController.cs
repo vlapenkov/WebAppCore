@@ -7,6 +7,7 @@ using Elasticsearch.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Newtonsoft.Json.Linq;
+using WebApp.DAL;
 using WebApp.Services;
 using WebAppCore.Models;
 using WebAppCore.Services;
@@ -19,12 +20,16 @@ namespace WebAppCore.Controllers
         private readonly IStringLocalizer<SharedResource> _resourceLocalizer;
 
         private readonly LocalizationService _localizationService;
+        private readonly JsonLocalizationService _ls;
 
-        public DummyController(IStringLocalizer<DummyController> localizer, IStringLocalizer<SharedResource> resourceLocalizer, LocalizationService localizationService)
+        public DummyController(IStringLocalizer<DummyController> localizer, IStringLocalizer<SharedResource> resourceLocalizer, 
+            LocalizationService localizationService,
+            JsonLocalizationService ls)
         {
             _localizer = localizer;
             _resourceLocalizer = resourceLocalizer;
             _localizationService = localizationService;
+            _ls = ls;
         }
 
         public IActionResult Index()
@@ -35,12 +40,20 @@ namespace WebAppCore.Controllers
             return View(model);
         }
 
+        public IActionResult IndexEnums()
+        {
+            OrderType orderType = OrderType.First;
+         var val= _ls.GetLocalizedEnum(orderType);
+
+            return Content(val);
+        }
+
         public IActionResult GetString()
         {
 
          var val =  _localizationService.GetResource("carts.text1", 1);
-
-            return Content(val);
+            var val2 = _ls["text1"];
+            return Content($"val is { val}, val2 is {val2}");
         }
 
 

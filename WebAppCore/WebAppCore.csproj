@@ -26,6 +26,8 @@
     <Content Include="Scripts\main.js">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Update="wwwroot\lib\**" CopyToPublishDirectory="Never" />
+    
   </ItemGroup>
 
  <!-- <ItemGroup>
@@ -36,20 +38,12 @@
   </ItemGroup>-->
   <ItemGroup>
     <PackageReference Include="Elasticsearch.Net" Version="6.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4"/>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" PrivateAssets="All" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-   <!-- <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.0.1916590" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" PrivateAssets="All" />-->
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />   
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.4.1" /> 
   </ItemGroup>
-  <ItemGroup><!--  <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" /> -->
-  
+  <ItemGroup>  
     <PackageReference Include="X.PagedList.Mvc.Core" Version="7.6.0" />
   </ItemGroup>
   <ItemGroup>
@@ -83,5 +77,4 @@
   <ItemGroup>
     <Folder Include="Data\" />
   </ItemGroup>
-
 </Project>

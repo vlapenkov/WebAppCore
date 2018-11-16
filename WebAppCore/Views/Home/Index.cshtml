@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
 @inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env
-@inject WebApp.Services.JsonLocalizationService ls
+
 
 <h3>String is:  @SharedLocalizer["String1"]</h3>
 
@@ -15,7 +15,7 @@
 
 <p>
     @T("text1")  @T("text2")
-    Text3  @T("text3")  Text4  @T("text4") Text4  @ls["text5"]
+    Text3  @T("text3")  Text4  @T("text4") Text4  
 </p>
 
 

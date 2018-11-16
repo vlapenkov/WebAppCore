@@ -30,6 +30,7 @@ namespace WebAppCore.Controllers
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            ViewData["ProducerId"] = new SelectList(_context.Producers, "Id", "Name");
             if (id == null)
             {
                 return NotFound();

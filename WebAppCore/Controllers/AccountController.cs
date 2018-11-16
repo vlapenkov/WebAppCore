@@ -18,6 +18,8 @@ using WebAppCore.WebModels.AccountViewModels;
 
 namespace WebAppCore.Controllers
 {
+    //
+
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

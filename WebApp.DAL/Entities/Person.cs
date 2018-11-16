@@ -12,11 +12,11 @@ namespace WebApp.DAL
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="text1")]
         [MaxLength(100)]
         public string Name { get; set; }
 
-        //[DefaultValue(100)]
+        [Required(ErrorMessage = "errors.textisrequired1")]
         public int Age { get; set; }
 
 

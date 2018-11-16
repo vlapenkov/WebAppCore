@@ -1,4 +1,7 @@
 {
   "text3": "This is example text3",
-  "text4": "This is example text4 refresh"
+  "text4": "This is example text4 refresh",
+  "Enums.WebApp.DAL.OrderType.First": "This is first enum value",
+  "Enums.WebApp.DAL.OrderType.Second": "This is second enum value",
+  "errors.textisrequired": "Age is required exactly"
 }

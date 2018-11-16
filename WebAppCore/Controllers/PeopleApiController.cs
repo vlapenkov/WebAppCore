@@ -28,6 +28,7 @@ namespace WebAppCore.Controllers
         [HttpGet]
         public IEnumerable<Person> GetPersons()
         {
+            throw new NullReferenceException("test");
             return _context.Persons;
         }
 

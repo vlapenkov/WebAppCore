@@ -17,7 +17,8 @@ namespace WebApp.DAL
         public DbSet<Producer> Producers { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<LocaleStringResource> LocaleStringResources { get; set; }
-        
+        public DbSet<ErrorLog> ErrorLogs { get; set; }
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -30,6 +31,8 @@ namespace WebApp.DAL
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+
+            builder.Entity<ErrorLog>().Property(t => t.DateCreated).HasDefaultValueSql("GetDate()");
         }
     }
 }

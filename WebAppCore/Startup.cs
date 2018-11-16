@@ -44,7 +44,7 @@ namespace WebAppCore
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
-            env.ConfigureNLog("nlog.config");
+         //   env.ConfigureNLog("nlog.config");
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -76,66 +76,47 @@ namespace WebAppCore
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.ConfigureApplicationServices(Configuration);
+            ServiceLocator.SetLocatorProvider(services.BuildServiceProvider());
 
+             services.AddResponseCaching();
 
-           
-
-            services.AddSingleton<IConfiguration>(Configuration);
-            services.AddSingleton(typeof(MemoryCacheManager));
-
-            services.AddResponseCaching();
-
-
-            services.AddSingleton(s => new JsonLocalizationService(s.GetService<IHostingEnvironment>(), "Resources"));
-            
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             
-            services.AddMvc(o => { o.Filters.Add<GlobalExceptionFilter>(); }) .AddViewLocalization().SetCompatibilityVersion(CompatibilityVersion.Version_2_1); ;
 
-            
+            services.AddHostedService<TimedHostedService>();
 
-            // Adds a default in-memory implementation of IDistributedCache.
+
             services.AddDistributedMemoryCache();
 
             services.AddSession(options =>
             {
-                // Set a short timeout for easy testing.
-            //    options.Cookie.Name = ".Terminal.Session";
+
                 options.IdleTimeout = TimeSpan.FromSeconds(30);
-               // options.Cookie.HttpOnly = true;
-                
-                //   options.CookieHttpOnly = true;
+
             });
 
+            services.AddMvc(o => { o.Filters.Add<GlobalExceptionFilter>(); }).AddViewLocalization()
+                 .AddDataAnnotationsLocalization(options => {
+                     options.DataAnnotationLocalizerProvider = (type, factory) =>
+                         factory.Create(null);
+                 })
+                //AddDataAnnotationsLocalization(o=>)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1); ;
 
-            bool condition = true;
-            services.AddSingleton<ISimple>(c=> { if (!condition) return new ClassA(); else return new ClassB(); });
 
-            // Add application services.
-            services.AddTransient<IEmailSender, AuthMessageSender>();
-            services.AddTransient<ISmsSender, AuthMessageSender>();
-            // можно и через singleton
-            services.AddTransient<ContextCheckingService>();
-            services.AddMemoryCache();
-            //services.AddSingleton<PersonsCachingService>();
-            services.AddSingleton(typeof(DbSetCachingService<>));
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddScoped(typeof(LocalizationService));
-            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
-
-            ServiceLocator.SetLocatorProvider(services.BuildServiceProvider());
-
-            services.AddHostedService<TimedHostedService>();
+            // Adds a default in-memory implementation of IDistributedCache.
+           
 
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             // отключаю стандартный log, т.к. он неи работает
-            //    loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            //   loggerFactory.AddDebug();
+                loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+               loggerFactory.AddDebug();
             // loggerFactory.AddEventLog();
 
 
@@ -144,10 +125,10 @@ namespace WebAppCore
             
 
 
-            loggerFactory.AddNLog();
+           // loggerFactory.AddNLog();
 
             //add NLog.Web
-            app.AddNLogWeb();
+          //  app.AddNLogWeb();
 
            
             var supportedCultures = new[]
@@ -203,9 +184,10 @@ namespace WebAppCore
             
             app.Use(async (context, next) =>
             {
+                
                var _dbContext= context.RequestServices.GetService<ApplicationDbContext>();
                var product= _dbContext.Set<Product>().AsNoTracking().First();
-                string culture = product.Id != 1 ? "ru": "en";
+                string culture = product.Id == 1 ? "ru": "en";
 
                 var requestCulture = new RequestCulture(culture);
                 context.Features.Set<IRequestCultureFeature>(new RequestCultureFeature(requestCulture, new QueryStringRequestCultureProvider()));

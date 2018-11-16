@@ -25,7 +25,7 @@ namespace WebAppCore.Controllers
         private readonly ContextCheckingService _ccs;
         private readonly IStringLocalizer<HomeController> _localizer;
         private readonly IStringLocalizer<SharedResource> _resourceLocalizer;
-        private readonly JsonLocalizationService _ls;
+        private readonly IStringLocalizer _ls;
 
         private IHostingEnvironment _env;
 
@@ -35,7 +35,7 @@ namespace WebAppCore.Controllers
             IStringLocalizer<HomeController> localizer,
             IStringLocalizer<SharedResource> resourceLocalizer,
             IHostingEnvironment env,
-            JsonLocalizationService ls
+            IStringLocalizer ls
             )
         {
             _resourceLocalizer = resourceLocalizer;

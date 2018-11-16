@@ -25,7 +25,9 @@ namespace WebApp.Services
 
         public LocalizedString T(string resource)  {
 
-            var service = ServiceLocator.Current.GetInstance<JsonLocalizationService>();
+            
+
+            var service = ServiceLocator.Current.GetInstance<IStringLocalizer> ();
             return service[resource];
         
         }
